@@ -7,9 +7,8 @@ class Scene : public Object {
 public:
     ~Scene() override = default;
     static std::shared_ptr<Scene> create() { return std::make_shared<Scene>(); }
+
 private:
 };
 
-}
-
-
+} // namespace TotoGL

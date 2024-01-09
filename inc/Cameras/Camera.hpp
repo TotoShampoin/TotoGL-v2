@@ -10,7 +10,8 @@ public:
     Matrix4 matrixWorldInverse() const;
     virtual Matrix4 projectionMatrix() const = 0;
     Matrix4 projectionMatrixInverse() const;
+
 private:
 };
 
-}
+} // namespace TotoGL

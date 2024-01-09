@@ -10,4 +10,4 @@ Matrix4 Camera::projectionMatrixInverse() const {
     return glm::inverse(projectionMatrix());
 }
 
-}
+} // namespace TotoGL

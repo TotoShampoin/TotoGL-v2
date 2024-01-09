@@ -20,4 +20,4 @@ struct Event {
     virtual ~Event() = default;
 };
 
-}
+} // namespace TotoGL

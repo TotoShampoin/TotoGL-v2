@@ -1,7 +1,7 @@
 #pragma once
 
-#include <glm/glm.hpp>
 #include <glm/ext/scalar_constants.hpp>
+#include <glm/glm.hpp>
 
 namespace TotoGL {
 
@@ -19,4 +19,4 @@ using Matrix4 = glm::mat4;
 using ColorRGB = glm::vec3;
 using ColorRGBA = glm::vec4;
 
-}
+} // namespace TotoGL

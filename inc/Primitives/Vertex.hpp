@@ -11,4 +11,4 @@ struct Vertex {
     Vector3 color;
 };
 
-}
+} // namespace TotoGL

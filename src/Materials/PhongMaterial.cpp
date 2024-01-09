@@ -13,42 +13,47 @@ PhongMaterial::PhongMaterial() {
     shininess(_shininess);
 }
 
-void PhongMaterial::emissive(const ColorVariant& emissive) {
+void PhongMaterial::emissive(const ColorVariant &emissive) {
     _emissive = emissive;
-    bool is_texture = std::holds_alternative<std::shared_ptr<Texture>>(emissive);
+    bool is_texture =
+        std::holds_alternative<std::shared_ptr<Texture>>(emissive);
     _shader->uniform("emissive_is_texture") = is_texture;
-    if(is_texture) {
-        _shader->uniform("emissive_color") = std::get<std::shared_ptr<Texture>>(emissive);
+    if (is_texture) {
+        _shader->uniform("emissive_color") =
+            std::get<std::shared_ptr<Texture>>(emissive);
     } else {
         _shader->uniform("emissive_texture") = std::get<ColorRGB>(emissive);
     }
 }
-void PhongMaterial::diffuse(const ColorVariant& diffuse) {
+void PhongMaterial::diffuse(const ColorVariant &diffuse) {
     _diffuse = diffuse;
     bool is_texture = std::holds_alternative<std::shared_ptr<Texture>>(diffuse);
     _shader->uniform("diffuse_is_texture") = is_texture;
-    if(is_texture) {
-        _shader->uniform("diffuse_color") = std::get<std::shared_ptr<Texture>>(diffuse);
+    if (is_texture) {
+        _shader->uniform("diffuse_color") =
+            std::get<std::shared_ptr<Texture>>(diffuse);
     } else {
         _shader->uniform("diffuse_texture") = std::get<ColorRGB>(diffuse);
     }
 }
-void PhongMaterial::specular(const ColorVariant& specular) {
+void PhongMaterial::specular(const ColorVariant &specular) {
     _specular = specular;
-    bool is_texture = std::holds_alternative<std::shared_ptr<Texture>>(specular);
+    bool is_texture =
+        std::holds_alternative<std::shared_ptr<Texture>>(specular);
     _shader->uniform("specular_is_texture") = is_texture;
-    if(is_texture) {
-        _shader->uniform("specular_color") = std::get<std::shared_ptr<Texture>>(specular);
+    if (is_texture) {
+        _shader->uniform("specular_color") =
+            std::get<std::shared_ptr<Texture>>(specular);
     } else {
         _shader->uniform("specular_texture") = std::get<ColorRGB>(specular);
     }
 }
-void PhongMaterial::shininess(const float& shininess) {
+void PhongMaterial::shininess(const float &shininess) {
     _shininess = shininess;
     _shader->uniform("shininess") = shininess;
 }
 
-const char* phong_vertex = R"glsl(
+const char *phong_vertex = R"glsl(
 #version 330 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
@@ -77,7 +82,7 @@ void main()
 }
 )glsl";
 
-const char* phong_fragment = R"glsl(
+const char *phong_fragment = R"glsl(
 #version 330 core
 #define MAX_LIGHT 16
 
@@ -148,4 +153,4 @@ void main() {
 }
 )glsl";
 
-}
+} // namespace TotoGL

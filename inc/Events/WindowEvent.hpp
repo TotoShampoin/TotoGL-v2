@@ -1,31 +1,27 @@
 #pragma once
 
-#include "Primitives/Primitives.hpp"
 #include "Events/Event.hpp"
+#include "Primitives/Primitives.hpp"
 
 namespace TotoGL {
 
 struct WindowCloseEvent : Event {
-    WindowCloseEvent(EventName t)
-        : Event(t) {}
+    WindowCloseEvent(EventName t) : Event(t) {}
 };
 
 struct WindowMinimizeEvent : Event {
     bool minimized;
-    WindowMinimizeEvent(EventName t, int m)
-        : Event(t), minimized(m) {}
+    WindowMinimizeEvent(EventName t, int m) : Event(t), minimized(m) {}
 };
 
 struct WindowMaximizeEvent : Event {
     bool maximized;
-    WindowMaximizeEvent(EventName t, int m)
-        : Event(t), maximized(m) {}
+    WindowMaximizeEvent(EventName t, int m) : Event(t), maximized(m) {}
 };
 
 struct WindowResizeEvent : Event {
     Vector2 size;
-    WindowResizeEvent(EventName t, Vector2 s)
-        : Event(t), size(std::move(s)) {}
+    WindowResizeEvent(EventName t, Vector2 s) : Event(t), size(std::move(s)) {}
 };
 
 struct MouseButtonEvent : Event {
@@ -62,4 +58,4 @@ struct KeyboardEvent : Event {
         : Event(t), key(k), scancode(s), action(a), mod(m) {}
 };
 
-}
+} // namespace TotoGL
