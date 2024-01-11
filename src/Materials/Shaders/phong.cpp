@@ -27,7 +27,7 @@ void main()
     Normal = mat3(transpose(inverse(model))) * aNormal;
     TexCoords = aTexCoords;
     Color = aColor;
-    ViewDirection = normalize(Position - vec3(view[3]));
+    ViewDirection = mat3(inverse(view)) * normalize(Position - vec3(view[3]));
 
     gl_Position = projection * view * model_position;
 }
@@ -85,9 +85,9 @@ vec3 getDirectionalLight(DirectionalLight light, vec3 diffuse, vec3 specular) {
     vec3 normal = normalize(Normal);
     vec3 light_dir = normalize(light.direction);
     // diffuse shading
-    float diff = max(dot(normal, -light_dir), 0.0);
+    float diff = max(dot(normal, light_dir), 0.0);
     // specular shading
-    vec3 reflect_dir = reflect(light_dir, normal);
+    vec3 reflect_dir = reflect(-light_dir, normal);
     float spec = pow(max(dot(ViewDirection, reflect_dir), 0.0), shininess);
     // combine results
     vec3 diffuse_color  = light.color * diff * diffuse;

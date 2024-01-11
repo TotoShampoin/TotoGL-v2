@@ -48,7 +48,7 @@ void Object::rotateZ(const float &angle) {
 }
 
 Matrix4 Object::matrix() const {
-    return glm::translate(_position) * glm::scale(_scale) * _rotation.matrix();
+    return glm::translate(_position) * _rotation.matrix() * glm::scale(_scale);
 }
 
 void Object::lookAt(const Vector3 &target, const Vector3 &up) {
