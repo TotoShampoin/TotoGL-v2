@@ -33,5 +33,6 @@ private:
     float _fov, _aspect, _near, _far;
     Matrix4 _projection_matrix;
 };
+using PerspectiveCameraPtr = std::shared_ptr<PerspectiveCamera>;
 
 } // namespace TotoGL

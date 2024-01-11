@@ -33,5 +33,6 @@ public:
 private:
     std::vector<std::shared_ptr<Material>> _materials;
 };
+using MultiMaterialPtr = std::shared_ptr<MultiMaterial>;
 
 } // namespace TotoGL

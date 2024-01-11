@@ -27,5 +27,6 @@ private:
         _world_direction = Vector4(glm::normalize(Vector3(matrixWorld() * Vector4(_direction, 1))), 1);
     }
 };
+using DirectionalLightPtr = std::shared_ptr<DirectionalLight>;
 
 } // namespace TotoGL

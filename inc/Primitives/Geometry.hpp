@@ -56,6 +56,7 @@ private:
     friend class OpenGLRenderer;
     friend class GL3Renderer;
 };
+using GeometryPtr = std::shared_ptr<Geometry>;
 
 struct PlaneGeometry : Geometry {
     PlaneGeometry(const float &width = 1, const float &height = 1);

@@ -10,5 +10,6 @@ public:
 
 private:
 };
+using GroupPtr = std::shared_ptr<Group>;
 
 } // namespace TotoGL

@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Primitives/Primitives.hpp"
 #include <GL/gl.h>
 #include <GL/glext.h>
 #include <fstream>
 #include <memory>
 #include <tuple>
+#include <variant>
 
 namespace TotoGL {
 
@@ -55,5 +57,7 @@ private:
     Wrapping _wrapping_vertical{ Texture::Wrapping::CLAMP_TO_EDGE };
     void load(std::basic_ifstream<char> &);
 };
+using TexturePtr = std::shared_ptr<Texture>;
+using ColorVariant = std::variant<ColorRGB, TexturePtr>;
 
 } // namespace TotoGL

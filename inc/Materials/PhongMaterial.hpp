@@ -5,7 +5,6 @@
 #include "Primitives/Primitives.hpp"
 #include "Primitives/Texture.hpp"
 #include <memory>
-#include <variant>
 
 namespace TotoGL {
 
@@ -14,7 +13,6 @@ extern const char *phong_fragment;
 
 class PhongMaterial : public Material {
 public:
-    using ColorVariant = std::variant<ColorRGB, std::shared_ptr<Texture>>;
     PhongMaterial();
     ~PhongMaterial() override = default;
     static std::shared_ptr<PhongMaterial> create() {
@@ -59,5 +57,6 @@ private:
     float _shininess{ 4. };
     float _emissive_strength{ 1. };
 };
+using PhongMaterialPtr = std::shared_ptr<PhongMaterial>;
 
 } // namespace TotoGL

@@ -41,5 +41,6 @@ private:
 
     void init();
 };
+using GL3RendererPtr = std::shared_ptr<GL3Renderer>;
 
 } // namespace TotoGL

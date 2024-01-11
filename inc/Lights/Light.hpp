@@ -2,6 +2,7 @@
 
 #include "Primitives/Object.hpp"
 #include "Primitives/Primitives.hpp"
+#include <memory>
 
 namespace TotoGL {
 
@@ -22,5 +23,6 @@ private:
     ColorRGB _color{ 1, 1, 1 };
     float _strength{ 1 };
 };
+using LightPtr = std::shared_ptr<Light>;
 
 } // namespace TotoGL

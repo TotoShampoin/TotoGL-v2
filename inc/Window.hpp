@@ -76,5 +76,6 @@ private:
 
     void _setupEvents();
 };
+using WindowPtr = std::shared_ptr<Window>;
 
 } // namespace TotoGL

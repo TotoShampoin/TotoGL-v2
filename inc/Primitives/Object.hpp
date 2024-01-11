@@ -79,6 +79,7 @@ private:
 
     std::vector<std::shared_ptr<Object>> _children;
 };
+using ObjectPtr = std::shared_ptr<Object>;
 
 } // namespace TotoGL
 

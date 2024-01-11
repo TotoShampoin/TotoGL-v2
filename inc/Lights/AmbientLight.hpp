@@ -17,5 +17,6 @@ private:
         Light::updateMatrixWorld(parent);
     }
 };
+using AmbientLightPtr = std::shared_ptr<AmbientLight>;
 
 } // namespace TotoGL

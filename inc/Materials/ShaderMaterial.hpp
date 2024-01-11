@@ -43,6 +43,7 @@ private:
     Uniform &uniform(const int &id) { return _uniforms[id]; }
     int uniformId(const std::string &name) const;
 };
+using ShaderMaterialPtr = std::shared_ptr<ShaderMaterial>;
 
 extern const char *simple_vertex;
 

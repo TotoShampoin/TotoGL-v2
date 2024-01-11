@@ -29,5 +29,6 @@ private:
     std::shared_ptr<Geometry> _geometry;
     std::shared_ptr<Material> _material;
 };
+using MeshPtr = std::shared_ptr<Mesh>;
 
 } // namespace TotoGL

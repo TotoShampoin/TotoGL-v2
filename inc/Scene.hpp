@@ -10,5 +10,6 @@ public:
 
 private:
 };
+using ScenePtr = std::shared_ptr<Scene>;
 
 } // namespace TotoGL

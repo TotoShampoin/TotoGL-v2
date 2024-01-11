@@ -27,5 +27,6 @@ private:
         _world_position = matrixWorld() * Vector4(_position, 1);
     }
 };
+using PointLightPtr = std::shared_ptr<PointLight>;
 
 } // namespace TotoGL

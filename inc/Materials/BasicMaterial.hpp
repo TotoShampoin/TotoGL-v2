@@ -49,5 +49,6 @@ private:
     ColorRGB _color;
     std::shared_ptr<Texture> _texture;
 };
+using BasicMaterialPtr = std::shared_ptr<BasicMaterial>;
 
 } // namespace TotoGL

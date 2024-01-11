@@ -1,6 +1,7 @@
 #pragma once
 #include "Primitives/Object.hpp"
 #include "Primitives/Primitives.hpp"
+#include <memory>
 
 namespace TotoGL {
 
@@ -13,5 +14,6 @@ public:
 
 private:
 };
+using CameraPtr = std::shared_ptr<Camera>;
 
 } // namespace TotoGL

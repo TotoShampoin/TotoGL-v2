@@ -11,7 +11,7 @@ namespace TotoGL {
 using Uniform = std::variant<
     int, float, bool, std::vector<int>, std::vector<float>, std::vector<bool>,
     Vector2, Vector3, Vector4, Matrix2, Matrix3, Matrix4,
-    std::shared_ptr<Texture>>;
+    TexturePtr>;
 
 struct UniformVisitor {
     uint program_id;
@@ -29,7 +29,7 @@ struct UniformVisitor {
     void operator()(const Matrix2 &value);
     void operator()(const Matrix3 &value);
     void operator()(const Matrix4 &value);
-    void operator()(const std::shared_ptr<Texture> &value);
+    void operator()(const TexturePtr &value);
 };
 
 } // namespace TotoGL

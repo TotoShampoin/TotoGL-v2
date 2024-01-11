@@ -55,7 +55,7 @@ void UniformVisitor::operator()(const Matrix4 &value) {
     glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(value));
 }
 
-void UniformVisitor::operator()(const std::shared_ptr<Texture> &texture) {
+void UniformVisitor::operator()(const TexturePtr &texture) {
     glActiveTexture(GL_TEXTURE0 + index_of_texture);
     glBindTexture(GL_TEXTURE_2D, texture->textureId());
     glUniform1i(id, index_of_texture);

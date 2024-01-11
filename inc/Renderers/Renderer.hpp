@@ -24,5 +24,6 @@ protected:
 private:
     std::shared_ptr<Window> _window;
 };
+using RendererPtr = std::shared_ptr<Renderer>;
 
 } // namespace TotoGL
