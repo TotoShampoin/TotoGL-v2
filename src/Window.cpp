@@ -58,6 +58,12 @@ void Window::makeContextCurrent() {
 bool Window::shouldClose() {
     return glfwWindowShouldClose(_glfw_window.get());
 }
+
+void Window::callBeforeSwap(const std::function<void()>& to_call) {
+    to_call();
+    swapBuffer();
+}
+
 void Window::size(const int &width, const int &height) {
     _width = width;
     _height = height;

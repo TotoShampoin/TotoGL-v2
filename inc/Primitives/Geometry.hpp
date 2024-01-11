@@ -53,7 +53,7 @@ private:
     void draw(const std::optional<size_t> & = std::nullopt);
     void sortTriangles();
     void fillSubgeometries();
-    friend class Renderer;
+    friend class OpenGLRenderer;
 };
 
 struct PlaneGeometry : Geometry {

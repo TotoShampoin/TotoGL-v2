@@ -33,7 +33,7 @@ public:
     void makeContextCurrent();
     bool shouldClose();
 
-    void refresh(std::function<void()>);
+    void callBeforeSwap(const std::function<void()>&);
 
     void size(const int &, const int &);
     void title(const std::string &);

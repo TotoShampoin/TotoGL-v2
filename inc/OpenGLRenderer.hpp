@@ -13,16 +13,16 @@
 
 namespace TotoGL {
 
-class Renderer {
+class OpenGLRenderer {
 public:
-    Renderer(
+    OpenGLRenderer(
         const std::shared_ptr<Window> &window =
             Window::create(800, 600, "Default Window"));
-    ~Renderer();
-    static std::shared_ptr<Renderer> create(
+    ~OpenGLRenderer();
+    static std::shared_ptr<OpenGLRenderer> create(
         const std::shared_ptr<Window> &window =
             Window::create(800, 600, "Default Window")) {
-        return std::make_shared<Renderer>(window);
+        return std::make_shared<OpenGLRenderer>(window);
     }
 
     void render(

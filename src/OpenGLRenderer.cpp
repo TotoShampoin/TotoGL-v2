@@ -7,7 +7,7 @@
 #include "Materials/MultiMaterial.hpp"
 #include "Primitives/Object.hpp"
 #include "Primitives/Primitives.hpp"
-#include "Renderer.hpp"
+#include "OpenGLRenderer.hpp"
 
 #include <cstddef>
 #include <memory>
@@ -17,25 +17,25 @@
 namespace TotoGL {
 
 static bool is_glew_init = false;
-void Renderer::init() {
+void OpenGLRenderer::init() {
     if (is_glew_init)
         return;
     auto init = glewInit();
     if (init) {
         std::ostringstream oss;
-        oss << "Couldn't initialize renderer: " << glewGetErrorString(init);
+        oss << "Couldn't initialize opengl renderer: " << glewGetErrorString(init);
         throw std::runtime_error(oss.str());
     }
 }
 
-Renderer::Renderer(const std::shared_ptr<Window> &window) : _window(window) {
+OpenGLRenderer::OpenGLRenderer(const std::shared_ptr<Window> &window) : _window(window) {
     window->makeContextCurrent();
     init();
 }
 
-Renderer::~Renderer() {}
+OpenGLRenderer::~OpenGLRenderer() {}
 
-void Renderer::render(
+void OpenGLRenderer::render(
     const std::shared_ptr<Scene> &scene, const std::shared_ptr<Camera> &camera,
     const bool &affect_window) const {
     if (affect_window)
@@ -56,7 +56,7 @@ void Renderer::render(
         _window->swapBuffer();
 }
 
-void Renderer::render_impl(
+void OpenGLRenderer::render_impl(
     const std::shared_ptr<Mesh> &mesh, const std::shared_ptr<Camera> &camera,
     const std::vector<std::shared_ptr<Light>> &lights) const {
     auto geometry = mesh->geometry();
@@ -86,13 +86,13 @@ void Renderer::render_impl(
 }
 
 std::vector<std::shared_ptr<Object>>
-Renderer::getObjectsBuffer(const std::shared_ptr<Scene> &scene) const {
+OpenGLRenderer::getObjectsBuffer(const std::shared_ptr<Scene> &scene) const {
     std::vector<std::shared_ptr<Object>> objects_buffer;
     fillObjectsBuffer(scene, objects_buffer);
     return objects_buffer;
 }
 
-void Renderer::fillObjectsBuffer(
+void OpenGLRenderer::fillObjectsBuffer(
     const std::shared_ptr<Object> &object,
     std::vector<std::shared_ptr<Object>> &objects_buffer,
     const Matrix4 &parent) const {
