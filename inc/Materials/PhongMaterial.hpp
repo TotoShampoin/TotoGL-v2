@@ -5,7 +5,6 @@
 #include "Primitives/Primitives.hpp"
 #include "Primitives/Texture.hpp"
 #include <memory>
-#include <optional>
 #include <variant>
 
 namespace TotoGL {
@@ -26,11 +25,13 @@ public:
     void diffuse(const ColorVariant &);
     void specular(const ColorVariant &);
     void shininess(const float &);
+    void emissiveStrength(const float &);
 
     const ColorVariant &emissive() const { return _emissive; }
     const ColorVariant &diffuse() const { return _diffuse; }
     const ColorVariant &specular() const { return _specular; }
     const float &shininess() const { return _shininess; }
+    const float &emissiveStrength() const { return _emissive_strength; }
 
     void applyModel(const Matrix4 &model) override {
         _shader->applyModel(model);
@@ -56,6 +57,7 @@ private:
     ColorVariant _diffuse{ ColorRGB{ 0 } };
     ColorVariant _specular{ ColorRGB{ 0 } };
     float _shininess{ 4. };
+    float _emissive_strength{ 1. };
 };
 
 } // namespace TotoGL

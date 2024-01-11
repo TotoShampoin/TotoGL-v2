@@ -67,7 +67,7 @@ public:
 
 protected:
     const Matrix4 &matrixWorld() const { return _matrix_world; }
-    void updateMatrixWorld(const Matrix4 &parent) {
+    virtual void updateMatrixWorld(const Matrix4 &parent) {
         _matrix_world = matrix() * parent;
     }
 
@@ -79,7 +79,7 @@ private:
     Matrix4 _matrix_world;
 
     std::vector<std::shared_ptr<Object>> _children;
-    friend class Renderer;
+    friend class OpenGLRenderer;
 };
 
 } // namespace TotoGL

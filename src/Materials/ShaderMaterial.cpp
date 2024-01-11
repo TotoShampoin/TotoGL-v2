@@ -87,14 +87,14 @@ void ShaderMaterial::applyLight(
         uniform("ambient" + light_idx + "color") = ambient_light->color();
         uniform("ambient" + light_idx + "strength") = ambient_light->strength();
     } else if (auto pointLight = std::dynamic_pointer_cast<PointLight>(light)) {
-        uniform("point" + light_idx + "position") = pointLight->position();
+        uniform("point" + light_idx + "position") = pointLight->worldPosition();
         uniform("point" + light_idx + "color") = pointLight->color();
         uniform("point" + light_idx + "strength") = pointLight->strength();
     } else if (
         auto directionalLight =
             std::dynamic_pointer_cast<DirectionalLight>(light)) {
         uniform("directional" + light_idx + "direction") =
-            directionalLight->direction();
+            directionalLight->worldDirection();
         uniform("directional" + light_idx + "color") =
             directionalLight->color();
         uniform("directional" + light_idx + "strength") =
@@ -109,29 +109,5 @@ void ShaderMaterial::applyLights(
         applyLight(light, i++);
     }
 }
-
-const char *simple_vertex = R"glsl(
-#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aNormal;
-layout (location = 2) in vec2 aTexCoords;
-layout (location = 3) in vec3 aColor;
-
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-
-out vec3 Normal;
-out vec2 TexCoords;
-out vec3 Color;
-
-void main()
-{
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
-    Normal = mat3(transpose(inverse(model))) * aNormal;
-    TexCoords = aTexCoords;
-    Color = aColor;
-}
-)glsl";
 
 } // namespace TotoGL

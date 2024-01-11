@@ -14,7 +14,7 @@ public:
     const float &strength() const { return _strength; }
 
 protected:
-    virtual void updateMatrixWorld(const Matrix4 &parent) {
+    virtual void updateMatrixWorld(const Matrix4 &parent) override {
         Object::updateMatrixWorld(parent);
     }
 

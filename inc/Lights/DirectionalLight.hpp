@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Light.hpp"
+#include <glm/geometric.hpp>
 
 namespace TotoGL {
 
@@ -23,7 +24,7 @@ private:
 
     void updateMatrixWorld(const Matrix4 &parent) override {
         Light::updateMatrixWorld(parent);
-        _world_direction = matrixWorld() * Vector4(_direction, 1);
+        _world_direction = Vector4(glm::normalize(Vector3(matrixWorld() * Vector4(_direction, 1))), 1);
     }
 };
 
