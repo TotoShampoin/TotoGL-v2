@@ -65,7 +65,6 @@ public:
     Vector3 &scale() { return _scale; }
     Euler &rotation() { return _rotation; }
 
-protected:
     const Matrix4 &matrixWorld() const { return _matrix_world; }
     virtual void updateMatrixWorld(const Matrix4 &parent) {
         _matrix_world = matrix() * parent;
@@ -79,7 +78,6 @@ private:
     Matrix4 _matrix_world;
 
     std::vector<std::shared_ptr<Object>> _children;
-    friend class OpenGLRenderer;
 };
 
 } // namespace TotoGL

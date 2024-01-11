@@ -14,7 +14,10 @@
 #include <Materials/ShaderMaterial.hpp>
 #include <Mesh.hpp>
 #include <Primitives/Geometry.hpp>
-#include <OpenGLRenderer.hpp>
+#include <Primitives/Primitives.hpp>
+#include <Primitives/Rotation.hpp>
+#include <Primitives/Texture.hpp>
+#include <Renderers/GL3Renderer.hpp>
 #include <Scene.hpp>
 #include <Window.hpp>
 

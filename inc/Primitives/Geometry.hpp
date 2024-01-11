@@ -54,6 +54,7 @@ private:
     void sortTriangles();
     void fillSubgeometries();
     friend class OpenGLRenderer;
+    friend class GL3Renderer;
 };
 
 struct PlaneGeometry : Geometry {
