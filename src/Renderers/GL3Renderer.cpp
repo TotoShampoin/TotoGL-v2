@@ -83,6 +83,7 @@ void GL3Renderer::render_impl(
         material->applyModel(mesh->matrixWorld());
         material->applyCamera(camera);
         material->applyLights(lights);
+        material->applyBackground(background());
         material->activate();
         geometry->draw(idx);
         material->deactivate();

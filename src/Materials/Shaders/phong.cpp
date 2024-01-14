@@ -36,6 +36,8 @@ void main()
 
 const char *phong_fragment = R"glsl(
 #version 330 core
+
+#define PI 3.1415927535
 #define MAX_LIGHT 16
 
 out vec4 FragColor;
@@ -81,19 +83,10 @@ uniform AmbientLight ambient_light[MAX_LIGHT];
 uniform PointLight point_light[MAX_LIGHT];
 uniform DirectionalLight directional_light[MAX_LIGHT];
 
-vec3 getEnvironmentColor(vec3 direction) {
-    vec4 clip_pos = vec4(VertPos, 1);
-    vec4 eye_pos = inverse(projection) * clip_pos;
-    eye_pos = vec4(eye_pos.xy, -1.0, 0.0);
-    vec4 world_pos = inverse(view) * eye_pos;
-    
-    vec3 ray_direction = normalize(world_pos.xyz);
-    vec2 uv = vec2(
-        0.5 + atan(direction.z, direction.x) / (2.0 * PI),
-        0.5 - asin(direction.y) / PI
-    );
-    vec3 color = texture(background_texture, uv).rgb;
-    return color;
+vec2 directionToUV(vec3 direction) {
+    float u = 0.5 + atan(direction.z, direction.x) / (2.0 * PI);
+    float v = 0.5 - asin(direction.y) / PI;
+    return vec2(u, v);
 }
 
 vec3 getColorOrTexture(vec2 uv, vec3 color, sampler2D image, bool is_texture) {
@@ -115,6 +108,15 @@ vec3 getDirectionalLight(DirectionalLight light, vec3 diffuse, vec3 specular) {
     return (diffuse_color + specular_color);
 }
 
+// very naive approach, also very wrong
+vec3 environmentLight(vec3 diffuse, vec3 specular) {
+    DirectionalLight environment_light;
+    environment_light.direction = -Normal;
+    environment_light.color = getColorOrTexture(directionToUV(-environment_light.direction), environment_color, environment_texture, environment_is_texture).rgb;
+    environment_light.strength = 1.0;
+    return getDirectionalLight(environment_light, diffuse, specular);
+}
+
 void main() {
     FragColor = vec4(0,0,0,1);
     vec3 emissive = getColorOrTexture(TexCoords, emissive_color, emissive_texture, emissive_is_texture);
@@ -122,6 +124,8 @@ void main() {
     vec3 specular = getColorOrTexture(TexCoords, specular_color, specular_texture, specular_is_texture);
     
     vec3 result = emissive * Color * emissive_strength;
+
+    // result += environmentLight(diffuse, specular);
 
     for(int i = 0; i < MAX_LIGHT; i++) {
         result += diffuse * ambient_light[i].color * ambient_light[i].strength;

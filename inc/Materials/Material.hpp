@@ -3,6 +3,7 @@
 #include "Cameras/Camera.hpp"
 #include "Lights/Light.hpp"
 #include "Primitives/Primitives.hpp"
+#include "Primitives/Texture.hpp"
 #include <memory>
 #include <vector>
 
@@ -16,6 +17,7 @@ public:
     virtual void
     applyLight(const std::shared_ptr<Light> &, const size_t & = 0) = 0;
     virtual void applyLights(const std::vector<std::shared_ptr<Light>> &) = 0;
+    virtual void applyBackground(const ColorVariant &) = 0;
     virtual void activate() = 0;
     virtual void deactivate() = 0;
 };

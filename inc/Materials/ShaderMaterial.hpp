@@ -32,6 +32,7 @@ public:
     void
     applyLight(const std::shared_ptr<Light> &, const size_t & = 0) override;
     void applyLights(const std::vector<std::shared_ptr<Light>> &) override;
+    void applyBackground(const ColorVariant &) override;
     void activate() override;
     void deactivate() override;
 

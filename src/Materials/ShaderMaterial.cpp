@@ -4,6 +4,7 @@
 #include "Lights/DirectionalLight.hpp"
 #include "Lights/PointLight.hpp"
 #include "Materials/ShaderMaterial.hpp"
+#include "Primitives/Primitives.hpp"
 #include "Primitives/Texture.hpp"
 #include <format>
 #include <memory>
@@ -108,6 +109,16 @@ void ShaderMaterial::applyLights(
     for (const auto &light : lights) {
         applyLight(light, i++);
     }
+}
+
+void ShaderMaterial::applyBackground(const ColorVariant &background) {
+    bool is_texture = std::holds_alternative<TexturePtr>(background);
+    if(is_texture) {
+        uniform("environment_texture") = std::get<TexturePtr>(background);
+    } else {
+        uniform("environment_color") = std::get<ColorRGB>(background);
+    }
+    uniform("environment_is_texture") = is_texture;
 }
 
 } // namespace TotoGL

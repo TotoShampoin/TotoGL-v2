@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Material.hpp"
+#include "Primitives/Texture.hpp"
 #include <initializer_list>
 #include <memory>
 #include <vector>
@@ -27,6 +28,7 @@ public:
     void applyCamera(const std::shared_ptr<Camera> &) override {}
     void applyLight(const std::shared_ptr<Light> &, const size_t &) override {}
     void applyLights(const std::vector<std::shared_ptr<Light>> &) override {}
+    void applyBackground(const ColorVariant &) override {}
     void activate() override {}
     void deactivate() override {}
 

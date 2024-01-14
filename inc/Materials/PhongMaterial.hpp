@@ -41,9 +41,13 @@ public:
         const std::shared_ptr<Light> &light, const size_t &idx = 0) override {
         _shader->applyLight(light, idx);
     }
-    void
-    applyLights(const std::vector<std::shared_ptr<Light>> &lights) override {
+    void applyLights(
+        const std::vector<std::shared_ptr<Light>> &lights
+    ) override {
         _shader->applyLights(lights);
+    }
+    void applyBackground(const ColorVariant &background) override {
+        _shader->applyBackground(background);
     }
     void activate() override { _shader->activate(); }
     void deactivate() override { _shader->deactivate(); }

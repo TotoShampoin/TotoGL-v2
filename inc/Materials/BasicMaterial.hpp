@@ -41,9 +41,15 @@ public:
         _shader->applyCamera(camera);
     }
     void applyLight(
-        const std::shared_ptr<Light> &light, const size_t &idx = 0) override {
+        const std::shared_ptr<Light> &light,
+        const size_t &idx = 0
+    ) override {
         _shader->applyLight(light, idx);
     }
+    void applyBackground(const ColorVariant &background) override {
+        _shader->applyBackground(background);
+    }
+
     void
     applyLights(const std::vector<std::shared_ptr<Light>> &lights) override {
         _shader->applyLights(lights);
