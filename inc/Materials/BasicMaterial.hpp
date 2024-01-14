@@ -16,7 +16,15 @@ public:
         const ColorRGB &color = ColorRGB(1.),
         const std::shared_ptr<Texture> &texture = nullptr);
     ~BasicMaterial() override = default;
-    static std::shared_ptr<BasicMaterial> create(const ColorRGB &color) {
+    BasicMaterial(const ColorVariant& color);
+
+    static std::shared_ptr<BasicMaterial> create(
+        const ColorRGB &color = ColorRGB(1.),
+        const std::shared_ptr<Texture> &texture = nullptr
+    ) {
+        return std::make_shared<BasicMaterial>(color, texture);
+    }
+    static std::shared_ptr<BasicMaterial> create(const ColorVariant& color) {
         return std::make_shared<BasicMaterial>(color);
     }
 

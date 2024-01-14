@@ -1,9 +1,16 @@
 #include <GL/glew.h> // MUST BE FIRST
 
+#include "Materials/BasicMaterial.hpp"
 #include "Materials/MultiMaterial.hpp"
+#include "Materials/ShaderMaterial.hpp"
+#include "Mesh.hpp"
+#include "Primitives/Geometry.hpp"
+#include "Primitives/Primitives.hpp"
+#include "Primitives/Texture.hpp"
 #include "Renderers/GL3Renderer.hpp"
 #include <GL/gl.h>
 #include <sstream>
+#include <variant>
 
 namespace TotoGL {
 
@@ -41,9 +48,28 @@ void GL3Renderer::render(
     auto objects_buffer = getObjectsBuffer(scene);
     auto meshes = Object::filter<Mesh>(objects_buffer);
     auto lights = Object::filter<Light>(objects_buffer);
+
+    render_background(camera);
+    glClear(GL_DEPTH_BUFFER_BIT);
     for (const auto &mesh : meshes) {
         render_impl(mesh, camera, lights);
     }
+}
+
+void GL3Renderer::render_background(const std::shared_ptr<Camera> &camera) const {
+    static auto quad = PlaneGeometry::create(2, 2);
+    static auto bg = ShaderMaterial::create(background_vertex, background_fragment);
+    bool is_texture = std::holds_alternative<TexturePtr>(_background);
+    if(is_texture) {
+        bg->uniform("background_texture") = std::get<TexturePtr>(_background);
+    } else {
+        bg->uniform("background_color") = std::get<ColorRGB>(_background);
+    }
+    bg->uniform("background_is_texture") = is_texture;
+    bg->applyCamera(camera); // view and projection
+    bg->activate();
+    quad->draw();
+    bg->deactivate();
 }
 
 void GL3Renderer::render_impl(

@@ -3,6 +3,7 @@
 #include "Cameras/Camera.hpp"
 #include "Lights/Light.hpp"
 #include "Mesh.hpp"
+#include "Primitives/Texture.hpp"
 #include "Renderer.hpp"
 #include "Scene.hpp"
 #include <memory>
@@ -28,7 +29,13 @@ public:
     void render(
         const std::shared_ptr<Scene> &, const std::shared_ptr<Camera> &) const;
 
+    void background(const ColorVariant& background) { _background = background; }
+    const ColorVariant& background() const { return _background; }
+
 private:
+    ColorVariant _background;
+
+    void render_background(const std::shared_ptr<Camera> &) const;
     void render_impl(
         const std::shared_ptr<Mesh> &, const std::shared_ptr<Camera> &,
         const std::vector<std::shared_ptr<Light>> &) const;
@@ -42,5 +49,8 @@ private:
     void init();
 };
 using GL3RendererPtr = std::shared_ptr<GL3Renderer>;
+
+extern const char* background_vertex;
+extern const char* background_fragment;
 
 } // namespace TotoGL

@@ -73,9 +73,28 @@ uniform bool specular_is_texture;
 uniform float shininess;
 uniform float emissive_strength;
 
+uniform sampler2D environment_texture;
+uniform vec3 environment_color;
+uniform bool environment_is_texture;
+
 uniform AmbientLight ambient_light[MAX_LIGHT];
 uniform PointLight point_light[MAX_LIGHT];
 uniform DirectionalLight directional_light[MAX_LIGHT];
+
+vec3 getEnvironmentColor(vec3 direction) {
+    vec4 clip_pos = vec4(VertPos, 1);
+    vec4 eye_pos = inverse(projection) * clip_pos;
+    eye_pos = vec4(eye_pos.xy, -1.0, 0.0);
+    vec4 world_pos = inverse(view) * eye_pos;
+    
+    vec3 ray_direction = normalize(world_pos.xyz);
+    vec2 uv = vec2(
+        0.5 + atan(direction.z, direction.x) / (2.0 * PI),
+        0.5 - asin(direction.y) / PI
+    );
+    vec3 color = texture(background_texture, uv).rgb;
+    return color;
+}
 
 vec3 getColorOrTexture(vec2 uv, vec3 color, sampler2D image, bool is_texture) {
     return is_texture ? texture(image, uv).rgb : color;
@@ -83,7 +102,7 @@ vec3 getColorOrTexture(vec2 uv, vec3 color, sampler2D image, bool is_texture) {
 
 vec3 getDirectionalLight(DirectionalLight light, vec3 diffuse, vec3 specular) {
     vec3 normal = normalize(Normal);
-    vec3 light_dir = normalize(light.direction);
+    vec3 light_dir = normalize(-light.direction);
     // diffuse shading
     float diff = max(dot(normal, light_dir), 0.0);
     // specular shading

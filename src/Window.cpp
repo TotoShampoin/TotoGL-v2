@@ -60,6 +60,7 @@ bool Window::shouldClose() {
 }
 
 void Window::callBeforeSwap(const std::function<void()>& to_call) {
+    makeContextCurrent();
     to_call();
     swapBuffer();
 }
