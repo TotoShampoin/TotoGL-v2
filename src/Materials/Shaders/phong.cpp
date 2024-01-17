@@ -92,17 +92,18 @@ vec3 getColorOrTexture(vec2 uv, vec3 color, sampler2D image, bool is_texture) {
     return is_texture ? texture(image, uv).rgb : color;
 }
 
-vec3 getDirectionalLight(DirectionalLight light, vec3 diffuse, vec3 specular) {
+vec3 getDirectionalLight(DirectionalLight light, float distance, vec3 diffuse, vec3 specular) {
     vec3 normal = normalize(Normal);
     vec3 light_dir = normalize(-light.direction);
+    float strength = 1 / (distance * distance);
     // diffuse shading
     float diff = max(dot(normal, light_dir), 0.0);
     // specular shading
     vec3 reflect_dir = reflect(-light_dir, normal);
     float spec = pow(max(dot(ViewDirection, reflect_dir), 0.0), shininess);
     // combine results
-    vec3 diffuse_color  = light.color * diff * diffuse;
-    vec3 specular_color = light.color * spec * specular;
+    vec3 diffuse_color  = light.color * light.strength * diff * diffuse * strength;
+    vec3 specular_color = light.color * light.strength * spec * specular * strength;
     
     return (diffuse_color + specular_color);
 }
@@ -113,7 +114,7 @@ vec3 environmentLight(vec3 diffuse, vec3 specular) {
     environment_light.direction = -Normal;
     environment_light.color = getColorOrTexture(directionToUV(-environment_light.direction), environment_color, environment_texture, environment_is_texture).rgb;
     environment_light.strength = 1.0;
-    return getDirectionalLight(environment_light, diffuse, specular);
+    return getDirectionalLight(environment_light, 1, diffuse, specular);
 }
 
 void main() {
@@ -128,7 +129,13 @@ void main() {
 
     for(int i = 0; i < MAX_LIGHT; i++) {
         result += diffuse * ambient_light[i].color * ambient_light[i].strength;
-        result += getDirectionalLight(directional_light[i], diffuse, specular);
+        result += getDirectionalLight(directional_light[i], 1, diffuse, specular);
+
+        DirectionalLight point_dirlight;
+        point_dirlight.direction = Position - point_light[i].position;
+        point_dirlight.color = point_light[i].color;
+        point_dirlight.strength = point_light[i].strength;
+        result += getDirectionalLight(point_dirlight, length(point_dirlight.direction), diffuse, specular);
     }
 
     FragColor = vec4(result, 1.0);
