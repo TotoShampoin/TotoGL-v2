@@ -2,7 +2,7 @@
 
 namespace TotoGL {
 
-const char* background_vertex = R"glsl(
+const char *background_vertex = R"glsl(
 #version 330
 layout (location = 0) in vec3 aPos;
 
@@ -17,8 +17,7 @@ void main() {
 }
 )glsl";
 
-
-const char* background_fragment = R"glsl(
+const char *background_fragment = R"glsl(
 #version 330
 #define PI 3.1415926535
 
@@ -55,4 +54,4 @@ void main() {
 }
 )glsl";
 
-}
+} // namespace TotoGL

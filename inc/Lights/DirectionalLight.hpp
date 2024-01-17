@@ -24,7 +24,8 @@ private:
 
     void updateMatrixWorld(const Matrix4 &parent) override {
         Light::updateMatrixWorld(parent);
-        _world_direction = Vector4(glm::normalize(Vector3(matrixWorld() * Vector4(_direction, 1))), 1);
+        _world_direction = Vector4(
+            glm::normalize(Vector3(matrixWorld() * Vector4(_direction, 1))), 1);
     }
 };
 using DirectionalLightPtr = std::shared_ptr<DirectionalLight>;

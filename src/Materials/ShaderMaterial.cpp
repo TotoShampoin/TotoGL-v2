@@ -113,7 +113,7 @@ void ShaderMaterial::applyLights(
 
 void ShaderMaterial::applyBackground(const ColorVariant &background) {
     bool is_texture = std::holds_alternative<TexturePtr>(background);
-    if(is_texture) {
+    if (is_texture) {
         uniform("environment_texture") = std::get<TexturePtr>(background);
     } else {
         uniform("environment_color") = std::get<ColorRGB>(background);

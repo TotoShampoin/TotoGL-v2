@@ -56,11 +56,13 @@ void GL3Renderer::render(
     }
 }
 
-void GL3Renderer::render_background(const std::shared_ptr<Camera> &camera) const {
+void GL3Renderer::render_background(
+    const std::shared_ptr<Camera> &camera) const {
     static auto quad = PlaneGeometry::create(2, 2);
-    static auto bg = ShaderMaterial::create(background_vertex, background_fragment);
+    static auto bg =
+        ShaderMaterial::create(background_vertex, background_fragment);
     bool is_texture = std::holds_alternative<TexturePtr>(_background);
-    if(is_texture) {
+    if (is_texture) {
         bg->uniform("background_texture") = std::get<TexturePtr>(_background);
     } else {
         bg->uniform("background_color") = std::get<ColorRGB>(_background);

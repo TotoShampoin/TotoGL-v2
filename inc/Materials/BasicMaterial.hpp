@@ -16,15 +16,14 @@ public:
         const ColorRGB &color = ColorRGB(1.),
         const std::shared_ptr<Texture> &texture = nullptr);
     ~BasicMaterial() override = default;
-    BasicMaterial(const ColorVariant& color);
+    BasicMaterial(const ColorVariant &color);
 
     static std::shared_ptr<BasicMaterial> create(
         const ColorRGB &color = ColorRGB(1.),
-        const std::shared_ptr<Texture> &texture = nullptr
-    ) {
+        const std::shared_ptr<Texture> &texture = nullptr) {
         return std::make_shared<BasicMaterial>(color, texture);
     }
-    static std::shared_ptr<BasicMaterial> create(const ColorVariant& color) {
+    static std::shared_ptr<BasicMaterial> create(const ColorVariant &color) {
         return std::make_shared<BasicMaterial>(color);
     }
 
@@ -41,9 +40,7 @@ public:
         _shader->applyCamera(camera);
     }
     void applyLight(
-        const std::shared_ptr<Light> &light,
-        const size_t &idx = 0
-    ) override {
+        const std::shared_ptr<Light> &light, const size_t &idx = 0) override {
         _shader->applyLight(light, idx);
     }
     void applyBackground(const ColorVariant &background) override {

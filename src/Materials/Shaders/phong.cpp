@@ -33,7 +33,6 @@ void main()
 }
 )glsl";
 
-
 const char *phong_fragment = R"glsl(
 #version 330 core
 
@@ -136,4 +135,4 @@ void main() {
 }
 )glsl";
 
-}
+} // namespace TotoGL

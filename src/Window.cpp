@@ -59,7 +59,7 @@ bool Window::shouldClose() {
     return glfwWindowShouldClose(_glfw_window.get());
 }
 
-void Window::callBeforeSwap(const std::function<void()>& to_call) {
+void Window::callBeforeSwap(const std::function<void()> &to_call) {
     makeContextCurrent();
     to_call();
     swapBuffer();

@@ -12,8 +12,8 @@ BasicMaterial::BasicMaterial(
     _shader->uniform("map") = _texture;
     _shader->uniform("has_texture") = false;
 }
-BasicMaterial::BasicMaterial(const ColorVariant& color) {
-    if(std::holds_alternative<TexturePtr>(color)) {
+BasicMaterial::BasicMaterial(const ColorVariant &color) {
+    if (std::holds_alternative<TexturePtr>(color)) {
         _texture = std::get<TexturePtr>(color);
     } else {
         _color = std::get<ColorRGB>(color);

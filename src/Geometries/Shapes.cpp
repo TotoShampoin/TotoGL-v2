@@ -20,7 +20,8 @@ PlaneGeometry::PlaneGeometry(const float &width, const float &height)
               { 0, 0, 1 },
               { 0, 1 },
               { 1, 1, 1 } } },
-          { { 0, 1, 2 }, { 2, 3, 0 } }) {}
+          { { 0, 1, 2 }, { 2, 3, 0 } }) {
+}
 
 BoxGeometry::BoxGeometry(
     const float &width, const float &height, const float &depth)
@@ -133,7 +134,8 @@ BoxGeometry::BoxGeometry(
             { 18, 19, 16 },
             { 20, 21, 22 },
             { 22, 23, 20 } },
-          { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 }) {}
+          { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 }) {
+}
 
 SphereGeometry::SphereGeometry(
     const float &radius, const int &width_segments,

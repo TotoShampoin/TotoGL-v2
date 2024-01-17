@@ -10,8 +10,7 @@ namespace TotoGL {
 
 using Uniform = std::variant<
     int, float, bool, std::vector<int>, std::vector<float>, std::vector<bool>,
-    Vector2, Vector3, Vector4, Matrix2, Matrix3, Matrix4,
-    TexturePtr>;
+    Vector2, Vector3, Vector4, Matrix2, Matrix3, Matrix4, TexturePtr>;
 
 struct UniformVisitor {
     uint program_id;
