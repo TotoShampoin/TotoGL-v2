@@ -15,7 +15,7 @@ file(GLOB_RECURSE TOTOGL_SOURCE_FILES CONFIGURE_DEPENDS ${TOTOGL_SOURCE_DIR}/*.c
 
 add_library(totogl INTERFACE)
 target_sources(totogl INTERFACE ${TOTOGL_SOURCE_FILES} ${TOTOGL_INCLUDE_FILES})
-target_compile_features(totogl INTERFACE cxx_std_20)
+target_compile_features(totogl INTERFACE cxx_std_23)
 
 target_include_directories(totogl INTERFACE ${OPENGL_INCLUDE_DIR})
 target_include_directories(totogl INTERFACE ${GLEW_INCLUDE_DIR})
