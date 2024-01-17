@@ -13,6 +13,7 @@
 #include <Materials/PhongMaterial.hpp>
 #include <Materials/ShaderMaterial.hpp>
 #include <Mesh.hpp>
+#include <Primitives/Clock.hpp>
 #include <Primitives/Geometry.hpp>
 #include <Primitives/Primitives.hpp>
 #include <Primitives/Rotation.hpp>
