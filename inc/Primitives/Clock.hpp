@@ -5,6 +5,8 @@
 
 namespace TotoGL {
 
+using Seconds = std::chrono::duration<float>;
+
 class Clock {
 public:
     Clock();
@@ -13,8 +15,8 @@ public:
         return std::make_shared<Clock>();
     }
 
-    decltype(std::chrono::milliseconds()) time();
-    decltype(std::chrono::milliseconds()) delta_time();
+    Seconds time();
+    Seconds delta_time();
 
 private:
     decltype(std::chrono::system_clock::now()) _start;
