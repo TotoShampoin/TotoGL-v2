@@ -23,7 +23,7 @@ public:
 
     std::vector<Vertex> vertices() { return _geometry->vertices(); }
     const std::shared_ptr<Material> &material() const { return _material; }
-    std::shared_ptr<Geometry> &geometry() { return _geometry; }
+    const std::shared_ptr<Geometry> &geometry() const { return _geometry; }
 
 private:
     std::shared_ptr<Geometry> _geometry;
