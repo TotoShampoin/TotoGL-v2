@@ -7,8 +7,11 @@
 
 namespace TotoGL {
 
-static bool is_init = false;
+void Window::GLFWwindowDeleter::operator()(GLFWwindow *ptr) {
+    glfwDestroyWindow(ptr);
+}
 
+static bool is_init = false;
 GLFWwindow *initAndCreateWindow(
     int width, int height, const char *title, GLFWmonitor *monitor,
     GLFWwindow *share) {

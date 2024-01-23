@@ -14,7 +14,7 @@ namespace TotoGL {
 class Window {
 private:
     struct GLFWwindowDeleter {
-        void operator()(GLFWwindow *ptr) { glfwDestroyWindow(ptr); }
+        void operator()(GLFWwindow *ptr);
     };
 
 public:
@@ -33,7 +33,7 @@ public:
     void makeContextCurrent();
     bool shouldClose();
 
-    void callBeforeSwap(const std::function<void()>&);
+    void callBeforeSwap(const std::function<void()> &);
 
     void size(const int &, const int &);
     void title(const std::string &);
