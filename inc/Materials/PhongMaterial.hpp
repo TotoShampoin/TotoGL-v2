@@ -13,10 +13,25 @@ extern const char *phong_fragment;
 
 class PhongMaterial : public Material {
 public:
-    PhongMaterial();
+    PhongMaterial(
+        const ColorVariant &diffuse = ColorRGB(0),
+        const ColorVariant &specular = ColorRGB(0),
+        const float &shininess = 4.f,
+        const ColorVariant &emissive = ColorRGB(0),
+        const float &emissive_strength = 0.);
     ~PhongMaterial() override = default;
-    static std::shared_ptr<PhongMaterial> create() {
-        return std::make_shared<PhongMaterial>();
+    static std::shared_ptr<PhongMaterial> create(
+        const ColorVariant &diffuse = ColorRGB(0),
+        const ColorVariant &specular = ColorRGB(0),
+        const float &shininess = 4.f,
+        const ColorVariant &emissive = ColorRGB(0),
+        const float &emissive_strength = 0.) {
+        return std::make_shared<PhongMaterial>(
+            diffuse,
+            specular,
+            shininess,
+            emissive,
+            emissive_strength);
     }
 
     void emissive(const ColorVariant &);
@@ -54,11 +69,11 @@ public:
 private:
     std::shared_ptr<ShaderMaterial> _shader =
         ShaderMaterial::create(phong_vertex, phong_fragment);
-    ColorVariant _emissive{ ColorRGB{ 0 } };
-    ColorVariant _diffuse{ ColorRGB{ 0 } };
-    ColorVariant _specular{ ColorRGB{ 0 } };
-    float _shininess{ 4. };
-    float _emissive_strength{ 1. };
+    ColorVariant _emissive;
+    ColorVariant _diffuse;
+    ColorVariant _specular;
+    float _shininess;
+    float _emissive_strength;
 };
 using PhongMaterialPtr = std::shared_ptr<PhongMaterial>;
 

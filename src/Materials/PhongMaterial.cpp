@@ -6,11 +6,22 @@
 
 namespace TotoGL {
 
-PhongMaterial::PhongMaterial() {
+PhongMaterial::PhongMaterial(
+    const ColorVariant &diff,
+    const ColorVariant &spec,
+    const float &shin,
+    const ColorVariant &emis,
+    const float &emis_stg)
+    : _emissive(emis),
+      _diffuse(diff),
+      _specular(spec),
+      _shininess(shin),
+      _emissive_strength(emis_stg) {
     emissive(_emissive);
     diffuse(_diffuse);
     specular(_specular);
     shininess(_shininess);
+    emissiveStrength(_emissive_strength);
 }
 
 void PhongMaterial::emissive(const ColorVariant &emissive) {
