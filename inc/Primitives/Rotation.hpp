@@ -1,9 +1,9 @@
 #pragma once
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/common.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
-#include <glm/gtx/quaternion.hpp>
 
 #include "Primitives.hpp"
 
